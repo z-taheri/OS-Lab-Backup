@@ -39,6 +39,15 @@ BACKUP_FILE="$BACKUP_DIR/backup_$(date +'%Y-%m-%d_%H-%M-%S').tar.gz"
 START_TIME=$(date +%s)
 tar -czf "$BACKUP_FILE" -T "$CONF_FILE"
 
+# Encrypt backup file
+read -s -p "Enter password to encrypt the backup: " ENCRYPT_PASS
+echo
+gpg --batch --yes --passphrase "$ENCRYPT_PASS" -c "$BACKUP_FILE"
+
+# Remove the unencrypted backup file
+rm "$BACKUP_FILE"
+BACKUP_FILE="$BACKUP_FILE.gpg"
+
 END_TIME=$(date +%s)
 
 BACKUP_SIZE=$(du -h "$BACKUP_FILE" | cut -f1)
