@@ -20,3 +20,11 @@ if [ ! -s "$CONF_FILE" ]; then
   echo "No files found with extension $FILE_EXT in $SEARCH_PATH"
   exit 1
 fi
+
+BACKUP_FILE="$BACKUP_DIR/backup_$(date +'%Y-%m-%d_%H-%M-%S').tar.gz"
+
+START_TIME=$(date +%s)
+
+tar -czf "$BACKUP_FILE" -T "$CONF_FILE"
+
+END_TIME=$(date +%s)
