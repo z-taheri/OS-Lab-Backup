@@ -28,3 +28,10 @@ START_TIME=$(date +%s)
 tar -czf "$BACKUP_FILE" -T "$CONF_FILE"
 
 END_TIME=$(date +%s)
+
+BACKUP_SIZE=$(du -h "$BACKUP_FILE" | cut -f1)
+DURATION=$((END_TIME - START_TIME))
+
+LOG_FILE="$BACKUP_DIR/backup.log"
+
+echo "$(date): SUCCESS - Backup $BACKUP_FILE created (Size: $BACKUP_SIZE, Duration: $DURATION seconds)" >> "$LOG_FILE"
