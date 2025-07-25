@@ -28,10 +28,6 @@ if [ ! -s "$CONF_FILE" ]; then
   exit 1
 fi
 
-BACKUP_FILE="$BACKUP_DIR/backup_$(date +'%Y-%m-%d_%H-%M-%S').tar.gz"
-
-START_TIME=$(date +%s)
-
 if [ "$DRY_RUN" = true ]; then
   echo "Dry-run mode: listing files that would be backed up..."
   cat "$CONF_FILE"
@@ -39,6 +35,8 @@ if [ "$DRY_RUN" = true ]; then
   exit 0
 fi
 
+BACKUP_FILE="$BACKUP_DIR/backup_$(date +'%Y-%m-%d_%H-%M-%S').tar.gz"
+START_TIME=$(date +%s)
 tar -czf "$BACKUP_FILE" -T "$CONF_FILE"
 
 END_TIME=$(date +%s)
