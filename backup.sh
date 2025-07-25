@@ -55,7 +55,7 @@ DURATION=$((END_TIME - START_TIME))
 
 LOG_FILE="$BACKUP_DIR/backup.log"
 
-echo "$(date): SUCCESS - Backup $BACKUP_FILE created (Size: $BACKUP_SIZE, Duration: $DURATION seconds)" >> "$LOG_FILE"
+echo "$(date): SUCCESS - Encrypted Backup $BACKUP_FILE created (Size: $BACKUP_SIZE, Duration: $DURATION seconds)" >> "$LOG_FILE"
 
 find "$BACKUP_DIR" -name "backup_*.tar.gz" -type f -mtime +$RETENTION_DAYS -exec rm -f {} \;
 
