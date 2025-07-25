@@ -9,3 +9,14 @@ SEARCH_PATH=$1
 FILE_EXT=$2
 BACKUP_DIR=$3
 RETENTION_DAYS=$4
+
+mkdir -p "$BACKUP_DIR"
+
+CONF_FILE="$BACKUP_DIR/backup_$(date +'%Y-%m-%d_%H-%M-%S').conf"
+
+find "$SEARCH_PATH" -type f -name "*$FILE_EXT" > "$CONF_FILE"
+
+if [ ! -s "$CONF_FILE" ]; then
+  echo "No files found with extension $FILE_EXT in $SEARCH_PATH"
+  exit 1
+fi
